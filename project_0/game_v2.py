@@ -6,7 +6,7 @@ import numpy as np
 
 
 def random_predict(number:int=1) -> int:
-    """Рандомно угадываем число
+    """угадываем число методом половинных отрезков
 
     Args:
         number (int, optional): Загаданное число. Defaults to 1.
@@ -27,10 +27,8 @@ def random_predict(number:int=1) -> int:
         elif mid < number:
             min = mid
         else:
-            #print(f"Компьютер угадал число за {count} попыток. Это число {number}")
             break #конец игры выход из цикла
     
-
     return count
 
 
@@ -44,15 +42,15 @@ def score_game(random_predict) -> int:
         int: среднее количество попыток
     """
     count_ls = []
-    #np.random.seed(1)  # фиксируем сид для воспроизводимости
+    np.random.seed(1)  # фиксируем сид для воспроизводимости
     random_array = np.random.randint(1, 101, size=(1000))  # загадали список чисел
 
-    for number in random_array:
+    for number in random_array:   # создаем в цикле массив  из чисел количества попыток угадываний
         count_ls.append(random_predict(number))
 
-    score = int(np.mean(count_ls))
+    score = int(np.mean(count_ls))  # получаем усредненное число количества попыток угадываний
     print(f"Ваш алгоритм угадывает число в среднем за:{score} попыток")
-    return score
+    
 
 
 if __name__ == "__main__":
